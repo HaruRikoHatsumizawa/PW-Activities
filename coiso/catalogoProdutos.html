@@ -1,0 +1,155 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Pudding</title>
+    <style>
+        .body {
+            background-color: rgb(9, 92, 115);
+        }
+        .catalogo {
+            display: flex;
+            flex-direction: row;
+            flex-wrap: nowrap;
+            gap: 16px;
+            align-items: flex-start;
+            overflow-x: auto;
+            background-color: rgb(9, 92, 115);
+            border-radius: 20px;
+        }
+
+        .catalogo-item {
+            flex: 0 0 280px;
+            padding: 16px;
+            border: 1px solid #ccc;
+            border-radius: 20px;
+            background-color:darkslategrey ;
+            color: white;
+        }
+
+        .catalogo-item img {
+            width: 100%;
+            height: 180px;
+            object-fit: contain;
+        }
+        .botao {
+            color: white;
+            background-color: blueviolet;
+        }
+        .seach {
+            color: rgb(9, 92, 115);
+            background-color: white;
+        }
+    </style>
+</head>
+<body class="body">
+    <form>
+        <input type="text" placeholder="Pesquisar produtos..." id="searchInput" class="search">
+        <button type="button" id="searchButton" class="botao">Pesquisar</button>
+        <select id="brandFilter" class="botao">
+            <option value="">Todas as marcas</option>
+            <option value="Asus">Asus</option>
+            <option value="Samsung">Samsung</option>
+            <option value="Apple">Apple</option>
+            <option value="Dell">Dell</option>
+            <option value="Lenovo">Lenovo</option>
+        </select>
+        <select id="priceFilter" class="botao">
+            <option value="">Todos os preços</option>
+            <option value="10000">Até R$ 10.000</option>
+            <option value="15000">Até R$ 15.000</option>
+            <option value="20000">Até R$ 20.000</option>
+            <option value="20001">Acima de R$ 20.000</option>
+        </select>
+        <button type="button" id="resetButton" class="botao">Resetar</button>
+        <br><br>
+        <div class="catalogo" id="catalogos" class="botao">
+        </div>
+    </form>
+    <script>
+        const catalogo = [
+            ['Asus Zenbook A16', 10483, 'Sistema Operacional: Windows 11 Home', 'Tela: OLED de 16", 2.8K, 120 Hz', 'Processador: SNAPDRAGON® X2 Elite Extreme X2E-94-100', 'Placa de Vídeo: Qualcomm® Adreno', 'Memória RAM: 24 GB LPDDR5X', 'Armazenamento: 512 GB SSD NVMe M2 PCIe® 4.0', 'Conectividade: Wi-Fi 7 (802.11be)', 'Tecnologia: Equipado com Inteligência Artificial', 'Teclado: Em Português, padrão ABNT2, com Ç e tecla Copilot', 'https://www.mundoconectado.com.br/wp-content/uploads/2026/08/asus-zenbook-a16-capa.jpg'],
+            ['Samsung Galaxy Book3 Ultra', 15990, 'Sistema Operacional: Windows 11 Home', 'Tela: AMOLED de 16", 2.8K, 120 Hz', 'Processador: Intel® Core™ i9-13980HX', 'Placa de Vídeo: NVIDIA® GeForce RTX™ 4070 Laptop GPU', 'Memória RAM: 32 GB LPDDR5X', 'Armazenamento: 1 TB SSD NVMe M2 PCIe® 4.0', 'Conectividade: Wi-Fi 6E (802.11ax)', 'Tecnologia: Equipado com Inteligência Artificial', 'Teclado: Em Português, padrão ABNT2, com Ç e tecla Copilot', 'https://img.global.news.samsung.com/ca/wp-content/uploads/2023/02/Samsung-Galaxy-Book3-Series-796x563.jpg'],
+            ['Apple MacBook Pro M2 Max', 25990, 'Sistema Operacional: macOS Ventura', 'Tela: Liquid Retina XDR de 16", 3456 x 2234 pixels', 'Processador: Apple M2 Max com CPU de 12 núcleos e GPU de 38 núcleos', 'Memória RAM: 64 GB unificada', 'Armazenamento: 1 TB SSD NVMe M2 PCIe® 4.0', 'Conectividade: Wi-Fi 6E (802.11ax)', 'Tecnologia: Equipado com Inteligência Artificial', 'Teclado: Em Português, padrão ABNT2, com Ç e tecla Copilot', 'https://www.apple.com/newsroom/images/product/mac/standard/Apple-MacBook-Pro-M2-Pro-and-M2-Max-hero-230117_Full-Bleed-Image.jpg.large.jpg'],
+            ['Dell XPS 17', 20990, 'Sistema Operacional: Windows 11 Home', 'Tela: OLED de 17", 3.5K, 120 Hz', 'Processador: Intel® Core™ i9-13900HK', 'Placa de Vídeo: NVIDIA® GeForce RTX™ 4070 Laptop GPU', 'Memória RAM: 64 GB LPDDR5X', 'Armazenamento: 2 TB SSD NVMe M2 PCIe® 4.0', 'Conectividade: Wi-Fi 6E (802.11ax)', 'Tecnologia: Equipado com Inteligência Artificial', 'Teclado: Em Português, padrão ABNT2, com Ç e tecla Copilot', 'https://www.techspot.com/images/products/2023/laptops/org/2023-06-06-product-3.jpg'],
+            ['Lenovo ThinkPad X1 Extreme Gen 6', 18990, 'Sistema Operacional: Windows 11 Home', 'Tela: OLED de 16", 2.8K, 120 Hz', 'Processador: Intel® Core™ i9-13980HX', 'Placa de Vídeo: NVIDIA® GeForce RTX™ 4070 Laptop GPU', 'Memória RAM: 32 GB LPDDR5X', 'Armazenamento: 1 TB SSD NVMe M2 PCIe® 4.0', 'Conectividade: Wi-Fi 6E (802.11ax)', 'Tecnologia: Equipado com Inteligência Artificial', 'Teclado: Em Português, padrão ABNT2, com Ç e tecla Copilot', 'https://d28jzcg6y4v9j1.cloudfront.net/media/social/articles/2023/6/21/lenovo-laptops-thinkpad-x1-extreme-gen-5-features-2-thinkpro-pmt.jpg']
+        ];
+        const divCatalogo = document.getElementById('catalogos');
+            const searchInput = document.getElementById('searchInput');
+        const brandFilter = document.getElementById('brandFilter');
+        const priceFilter = document.getElementById('priceFilter');
+
+        function renderCatalogo() {
+            const searchTerm = searchInput.value.trim().toLowerCase();
+            const selectedBrand = brandFilter.value.toLowerCase();
+            const selectedPrice = priceFilter.value;
+
+            const produtosFiltrados = catalogo.filter(item => {
+                const textoProduto = item.slice(0, -1).join(' ').toLowerCase();
+                const nomeProduto = item[0].toLowerCase();
+                const preco = item[1];
+                const correspondeBusca = textoProduto.includes(searchTerm);
+                const correspondeMarca = !selectedBrand || nomeProduto.startsWith(selectedBrand);
+                const correspondePreco = !selectedPrice
+                    || (selectedPrice === '20001' && preco > 20000)
+                    || (selectedPrice !== '20001' && preco <= Number(selectedPrice));
+
+                return correspondeBusca && correspondeMarca && correspondePreco;
+            });
+
+            divCatalogo.innerHTML = produtosFiltrados.length
+                ? produtosFiltrados.map(item => `
+                    <div class="catalogo-item">
+                        <img src="${item[item.length - 1]}" alt="${item[0]}">
+                        <h3>${item[0]}</h3>
+                        <ul>
+                            ${item.slice(1, -1).map(detail => `<li>${detail}</li>`).join('')}
+                        </ul>
+                    </div>
+                `).join('')
+                : '<p>Nenhum produto encontrado.</p>';
+        }
+
+        document.getElementById('searchButton').addEventListener('click', renderCatalogo);
+        searchInput.addEventListener('input', renderCatalogo);
+        brandFilter.addEventListener('change', renderCatalogo);
+        priceFilter.addEventListener('change', renderCatalogo);
+        document.getElementById('resetButton').addEventListener('click', () => {
+            searchInput.value = '';
+            brandFilter.value = '';
+            priceFilter.value = '';
+            renderCatalogo();
+        });
+
+        renderCatalogo();
+        // //catalogo.forEach((catalogo) => {
+        //     // const divCard = document.createElement('div');
+        //     // divCard.classList.add('divCard');
+            
+        //     // const inputRadio = document.createElement('input');
+        //     // inputRadio.setAttribute('type', 'radio');
+        //     // inputRadio.setAttribute('name', 'catalogo');
+        //     // const label = document.createElement('label');
+        //     // label.innerHTML = catalogo;
+        //     // const br = document.createElement('br');
+
+
+        //     // divCatalogo.appendChild(inputRadio);
+           
+        //     // divCatalogo.appendChild(label);
+        //     // divCatalogo".appendChild(br);
+        //     document.getElementById('catalogos').innerHTML = 
+        //     catalogo.map(item => `
+        //         <div class="catalogo-item">
+        //         <img src="${item.image}" alt="${item.name}">
+        //         <h3>${item.name}</h3>
+        //         <p>${item.price}</p>
+        //         </div>
+        //     )`.join('');
+        //     });
+
+
+    </script>
+</body>
+</html>

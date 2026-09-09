@@ -1,0 +1,34 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+
+</head>
+<body>
+    <form>
+        <div class="cursos" id="cursos">
+            
+        </div>
+    </form>
+    <script>
+        const cursos = ['Desenvolvimento Software', 'Adm', 'Mecânica', 'Eletronica', 'Logística', 'Eletrotécnica'];
+
+        const divCursos = document.getElementById('cursos');
+        cursos.forEach((curso) => {
+            const inputRadio = document.createElement('input');
+            inputRadio.setAttribute('type', 'radio');
+            inputRadio.setAttribute('name', 'curso');
+            const label = document.createElement('label');
+            label.innerHTML = curso;
+            const br = document.createElement('br');
+
+
+            divCursos.appendChild(inputRadio);
+            divCursos.appendChild(label);
+            divCursos.appendChild(br);
+        });
+</script>
+</body>
+</html>
