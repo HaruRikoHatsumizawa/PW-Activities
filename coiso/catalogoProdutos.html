@@ -11,12 +11,14 @@
         .catalogo {
             display: flex;
             flex-direction: row;
-            flex-wrap: nowrap;
+            flex-wrap: wrap;
             gap: 16px;
             align-items: flex-start;
             overflow-x: auto;
             background-color: rgb(9, 92, 115);
             border-radius: 20px;
+            justify-content: center;
+            align-items: space-around;
         }
 
         .catalogo-item {
@@ -36,10 +38,14 @@
         .botao {
             color: white;
             background-color: blueviolet;
+            border: 1px solid #4000fe;
+            border-radius: 20px;
         }
-        .seach {
-            color: rgb(9, 92, 115);
-            background-color: white;
+        .search {
+            color: rgb(23, 93, 113);
+            background-color: rgb(255, 255, 255);
+            border: 1px solid #4a00f7;
+            border-radius: 20px;
         }
     </style>
 </head>
@@ -54,6 +60,7 @@
             <option value="Apple">Apple</option>
             <option value="Dell">Dell</option>
             <option value="Lenovo">Lenovo</option>
+            <option value="SteamDeck">SteamDeck</option>
         </select>
         <select id="priceFilter" class="botao">
             <option value="">Todos os preços</option>
@@ -64,7 +71,9 @@
         </select>
         <button type="button" id="resetButton" class="botao">Resetar</button>
         <br><br>
+        
         <div class="catalogo" id="catalogos" class="botao">
+        
         </div>
     </form>
     <script>
@@ -74,7 +83,7 @@
             ['Apple MacBook Pro M2 Max', 25990, 'Sistema Operacional: macOS Ventura', 'Tela: Liquid Retina XDR de 16", 3456 x 2234 pixels', 'Processador: Apple M2 Max com CPU de 12 núcleos e GPU de 38 núcleos', 'Memória RAM: 64 GB unificada', 'Armazenamento: 1 TB SSD NVMe M2 PCIe® 4.0', 'Conectividade: Wi-Fi 6E (802.11ax)', 'Tecnologia: Equipado com Inteligência Artificial', 'Teclado: Em Português, padrão ABNT2, com Ç e tecla Copilot', 'https://www.apple.com/newsroom/images/product/mac/standard/Apple-MacBook-Pro-M2-Pro-and-M2-Max-hero-230117_Full-Bleed-Image.jpg.large.jpg'],
             ['Dell XPS 17', 20990, 'Sistema Operacional: Windows 11 Home', 'Tela: OLED de 17", 3.5K, 120 Hz', 'Processador: Intel® Core™ i9-13900HK', 'Placa de Vídeo: NVIDIA® GeForce RTX™ 4070 Laptop GPU', 'Memória RAM: 64 GB LPDDR5X', 'Armazenamento: 2 TB SSD NVMe M2 PCIe® 4.0', 'Conectividade: Wi-Fi 6E (802.11ax)', 'Tecnologia: Equipado com Inteligência Artificial', 'Teclado: Em Português, padrão ABNT2, com Ç e tecla Copilot', 'https://www.techspot.com/images/products/2023/laptops/org/2023-06-06-product-3.jpg'],
             ['Lenovo ThinkPad X1 Extreme Gen 6', 18990, 'Sistema Operacional: Windows 11 Home', 'Tela: OLED de 16", 2.8K, 120 Hz', 'Processador: Intel® Core™ i9-13980HX', 'Placa de Vídeo: NVIDIA® GeForce RTX™ 4070 Laptop GPU', 'Memória RAM: 32 GB LPDDR5X', 'Armazenamento: 1 TB SSD NVMe M2 PCIe® 4.0', 'Conectividade: Wi-Fi 6E (802.11ax)', 'Tecnologia: Equipado com Inteligência Artificial', 'Teclado: Em Português, padrão ABNT2, com Ç e tecla Copilot', 'https://d28jzcg6y4v9j1.cloudfront.net/media/social/articles/2023/6/21/lenovo-laptops-thinkpad-x1-extreme-gen-5-features-2-thinkpro-pmt.jpg'],
-            ['SteamDeck', 4990, 'Tela OLED HDR de 1.280 x 800 com vidro antirreflexo de alta qualidade, Tela de 7,4 polegadas na diagonal, Taxa de atualização de até 90 Hz, Wi-Fi 6E, Bateria de 50 Wh (entre 3 a 12 horas de jogo — dependendo do uso), Fonte de alimentação de 45 W com cabo de 2,5 m, Estojo de viagem com forro removível, Pacote de perfil do Steam, vídeo de inicialização e tema para o teclado virtual exclusivos']
+            ['SteamDeck', 4990, 'Tela OLED HDR de 1.280 x 800 com vidro antirreflexo de alta qualidade, Tela de 7,4 polegadas na diagonal, Taxa de atualização de até 90 Hz, Wi-Fi 6E, Bateria de 50 Wh (entre 3 a 12 horas de jogo — dependendo do uso), Fonte de alimentação de 45 W com cabo de 2,5 m, Estojo de viagem com forro removível, Pacote de perfil do Steam, vídeo de inicialização e tema para o teclado virtual exclusivos', 'https://cdn.cloudflare.steamstatic.com/steamdeck/images/social_media_image.jpg']
         ];
         const divCatalogo = document.getElementById('catalogos');
             const searchInput = document.getElementById('searchInput');
