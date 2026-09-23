@@ -3,51 +3,8 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="style.css">
     <title>Pudding</title>
-    <style>
-        .body {
-            background-color: rgb(9, 92, 115);
-        }
-        .catalogo {
-            display: flex;
-            flex-direction: row;
-            flex-wrap: wrap;
-            gap: 16px;
-            align-items: flex-start;
-            overflow-x: auto;
-            background-color: rgb(9, 92, 115);
-            border-radius: 20px;
-            justify-content: center;
-            align-items: space-around;
-        }
-
-        .catalogo-item {
-            flex: 0 0 280px;
-            padding: 16px;
-            border: 1px solid #ccc;
-            border-radius: 20px;
-            background-color:darkslategrey ;
-            color: white;
-        }
-
-        .catalogo-item img {
-            width: 100%;
-            height: 180px;
-            object-fit: contain;
-        }
-        .botao {
-            color: white;
-            background-color: blueviolet;
-            border: 1px solid #4000fe;
-            border-radius: 20px;
-        }
-        .search {
-            color: rgb(23, 93, 113);
-            background-color: rgb(255, 255, 255);
-            border: 1px solid #4a00f7;
-            border-radius: 20px;
-        }
-    </style>
 </head>
 <body class="body">
     <form>
@@ -88,7 +45,7 @@
             
         ];
         const divCatalogo = document.getElementById('catalogos');
-            const searchInput = document.getElementById('searchInput');
+        const searchInput = document.getElementById('searchInput');
         const brandFilter = document.getElementById('brandFilter');
         const priceFilter = document.getElementById('priceFilter');
 
@@ -113,14 +70,14 @@
             divCatalogo.innerHTML = produtosFiltrados.length
                 ? produtosFiltrados.map(item => `
                     <div class="catalogo-item">
-                        <img src="${item[item.length - 1]}" alt="${item[0]}">
+                        <img src="${item[item.length - 1]}" alt="${item[0]}" class="image">
                         <h3>${item[0]}</h3>
                         <ul>
                             ${item.slice(1, -1).map(detail => `<li>${detail}</li>`).join('')}
                         </ul>
                     </div>
                 `).join('')
-                : '<p>Nenhum produto encontrado.</p>';
+                : '<p class="no-products">Nenhum produto encontrado.</p>';
         }
 
         document.getElementById('searchButton').addEventListener('click', renderCatalogo);

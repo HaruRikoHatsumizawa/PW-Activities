@@ -1,0 +1,54 @@
+.body {
+            background-color: rgb(11, 6, 26);
+        }
+        .catalogo {
+            display: flex;
+            flex-direction: row;
+            flex-wrap: wrap;
+            gap: 16px;
+            align-items: flex-start;
+            overflow-x: auto;
+            background-color: rgb(11, 6, 26);
+            border-radius: 20px;
+            justify-content: center;
+            align-items: space-around;
+        }
+
+        .catalogo-item {
+            flex: 0 0 280px;
+            padding: 16px;
+            border: 1px solid #00000000;
+            border-radius: 20px;
+            background-color:rgb(9, 18, 36) ;
+            color: white;
+        }
+
+        .catalogo-item img {
+            width: 100%;
+            height: 180px;
+            object-fit: contain;
+        }
+        .botao {
+            color: white;
+            background-color: rgb(9, 18, 36);
+            border: 1px solid rgb(14, 28, 56);
+            border-radius: 20px;
+        }
+        .search {
+            color: rgb(249, 249, 249);
+            background-color: rgb(32, 10, 48);
+            border: 1px solid #6c657a00;
+            border-radius: 20px;
+        }
+        .no-products {
+            color: white;
+            font-size: 18px;
+            text-align: center;
+            margin-top: 20px;
+        }
+        .image {
+            border-radius: 5px;
+            
+
+            
+        }
